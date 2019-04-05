@@ -1,15 +1,17 @@
 package epam.labs.dzmitry.zorych.mainapp;
 
-import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import epam.labs.dzmitry.zorych.entity.Location;
-import epam.labs.dzmitry.zorych.entity.Weather;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 public class Main {
     private final static String locationUrl =

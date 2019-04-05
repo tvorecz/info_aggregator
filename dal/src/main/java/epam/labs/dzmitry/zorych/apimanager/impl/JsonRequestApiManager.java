@@ -15,7 +15,6 @@ import java.net.URLConnection;
 public class JsonRequestApiManager implements JsonApiManager {
     private RequestUrlBuilder urlBuilder;
 
-
     public JsonRequestApiManager(RequestUrlBuilder urlBuilder) {
         this.urlBuilder = urlBuilder;
     }
