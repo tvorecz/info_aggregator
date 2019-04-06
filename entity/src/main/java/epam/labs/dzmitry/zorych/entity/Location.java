@@ -1,11 +1,9 @@
 package epam.labs.dzmitry.zorych.entity;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.TimeZone;
 
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -23,7 +21,7 @@ public class Location implements Serializable {
 
     @Setter
     @Getter
-    private TimeZone timeZone;
+    private String timeZone;
 
     @Getter
     @Setter

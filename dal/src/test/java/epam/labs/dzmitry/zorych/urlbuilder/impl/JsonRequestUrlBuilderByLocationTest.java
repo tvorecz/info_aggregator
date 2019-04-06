@@ -21,8 +21,8 @@ public class JsonRequestUrlBuilderByLocationTest {
     private final static String weatherUrl = "https://api.darksky.net/forecast/${key}/${latitude},${longitude}";
     private final static String expectedWeatherUrl = "https://api.darksky.net/forecast/5a17e15699764435a31deeb97a9fd13e/40.2311,-32.12312";
 
-    private final static String currencyUrl = "http://data.fixer.io/api/latest?access_key=${key}&format=1";
-    private final static String expectedCurrencyUrl = "http://data.fixer.io/api/latest?access_key=5a17e15699764435a31deeb97a9fd13e&format=1";
+    private final static String currencyUrl = "https://free.currencyconverterapi.com/api/v6/convert?q=${iso_code}_USD,${iso_code}_EUR,${iso_code}_GBP,${iso_code}_CNY&compact=ultra&apiKey=${key}";
+    private final static String expectedCurrencyUrl = "https://free.currencyconverterapi.com/api/v6/convert?q=BYN_USD,BYN_EUR,BYN_GBP,BYN_CNY&compact=ultra&apiKey=5a17e15699764435a31deeb97a9fd13e";
 
     private final static String badUrl = "koko.by";
 

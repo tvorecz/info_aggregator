@@ -5,20 +5,24 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import epam.labs.dzmitry.zorych.entity.Location;
+import epam.labs.dzmitry.zorych.entity.Weather;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.SimpleTimeZone;
+import java.util.TimeZone;
 
 public class Main {
     private final static String locationUrl =
             "https://api.opencagedata.com/geocode/v1/json?key=5a17e15699764435a31deeb97a9fd13e&q=53.9045+27" +
             ".5615&pretty=1";
     private final static String weatherUrl =
-            "https://api.darksky.net/forecast/f096461ff61c1e66669b3cf4ca10f28f/53.9045,27.5615";
+            "https://api.darksky.net/forecast/f096461ff61c1e66669b3cf4ca10f28f/53.9045,27.5615?exclude=minutely,hourly,daily,alerts,flags";
     private final static String currensyUrl =
             "http://data.fixer.io/api/latest?access_key=4078f5c77901a5b2e6fe0b87ab5247a4&format=1";
 
@@ -53,7 +57,7 @@ public class Main {
         InputStream stream = null;
         String charset = null;
         try {
-            URL url = new URL(locationUrl);
+            URL url = new URL(weatherUrl);
 //            stream = url.openStream();
             //charset
             URLConnection urlConnection = url.openConnection();
@@ -117,15 +121,46 @@ public class Main {
 
         JsonObject jsonObject = json.getAsJsonObject();
 
-        JsonElement iso_code =
-                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("annotations").getAsJsonObject().get(
-                        "currency").getAsJsonObject().get("iso_code");
+//        String iso_code =
+//                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("annotations").getAsJsonObject().get(
+//                        "currency").getAsJsonObject().get("iso_code").getAsString();
+//
+//        BigDecimal latitude =
+//                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("lat").getAsBigDecimal();
+//
+//        BigDecimal longitude =
+//                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("geometry").getAsJsonObject().get("lng").getAsBigDecimal();
+//
+//        String timeZone =
+//                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("annotations").getAsJsonObject().get(
+//                        "timezone").getAsJsonObject().get("name").getAsString();
+//
+//        String continent =
+//                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("components").getAsJsonObject().get("continent").getAsString();
+//
+//        String country =
+//                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("components").getAsJsonObject().get("country").getAsString();
+//
+//        String city =
+//                jsonObject.getAsJsonArray("results").get(0).getAsJsonObject().get("components").getAsJsonObject().get("city").getAsString();
 
-        Gson gson = new Gson();
+//        Gson gson = new Gson();
+//
+//        Location location = gson.fromJson(json, Location.class);
+//        System.out.println(location);
 
-        Location location = gson.fromJson(json, Location.class);
+        Weather weather = new Weather();
 
-        System.out.println(location);
+//        weather.setLocation(location);
+        weather.setSummary(jsonObject.get("currently").getAsJsonObject().get("summary").getAsString());
+        weather.setIcon(jsonObject.get("currently").getAsJsonObject().get("icon").getAsString());
+        weather.setTemperature(jsonObject.get("currently").getAsJsonObject().get("temperature").getAsInt());
+        weather.setApparentTemperature(jsonObject.get("currently").getAsJsonObject().get("apparentTemperature").getAsInt());
+        weather.setPressure(jsonObject.get("currently").getAsJsonObject().get("pressure").getAsDouble());
+        weather.setWindSpeed(jsonObject.get("currently").getAsJsonObject().get("windSpeed").getAsInt());
+        weather.setWindGust(jsonObject.get("currently").getAsJsonObject().get("windGust").getAsInt());
+
+        System.out.println(weather);
 
     }
 }

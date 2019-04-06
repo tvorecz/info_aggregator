@@ -13,13 +13,17 @@ public class JsonRequestUrlBuilderByLocation implements RequestUrlBuilder {
     private final static String LONGITUDE = "${longitude}";
     private final static String ISO_CODE = "${iso_code}";
     private final static String KEY = "${key}";
-    private final static String[] PARAMS = {KEY, LATITUDE, LONGITUDE, KEY};
+    private final static String[] PARAMS = {KEY, LATITUDE, LONGITUDE, ISO_CODE};
+    private final static String[] EXCHANGE_PARAMS = {"${***}", "${******}", "${*********}", "${********}"};
 
     private final String urlTemplate;
     private final String key;
-    private List<String> actualParams;
+    private List<String> actualParamsForCurrentRequest;
     private String urlTemplateExample =
             "https://api.opencagedata.com/geocode/v1/json?key=${key}&q=${latitude}+${longitude}&pretty=1";
+
+    String url =
+    "https://free.currencyconverterapi.com/api/v6/convert?q=${iso_code}_USD,${iso_code}_EUR,${iso_code}_GBP,${iso_code}_CNY&compact=ultra&apiKey=${key}";
 
     public JsonRequestUrlBuilderByLocation(String urlTemplate, String key) {
         this.urlTemplate = prepareUrlTemplate(urlTemplate);
@@ -46,24 +50,34 @@ public class JsonRequestUrlBuilderByLocation implements RequestUrlBuilder {
     }
 
     private String prepareUrlTemplate(String urlTemplate) {
-        Map<Integer, String> indexesAndParams = new HashMap<>();
-        actualParams = new ArrayList<>();
+        Map<Integer, String> indexesAndParamsInRequestString = new HashMap<>();
+        actualParamsForCurrentRequest = new ArrayList<>();
 
-        for (String param : PARAMS) {
-            int index = urlTemplate.indexOf(param);
+        boolean continueCycle;
+        String template = urlTemplate;
 
-            if(index > -1) {
-                indexesAndParams.put(index, param);
+        for (int i = 0; i < PARAMS.length; i++) {
+            continueCycle = true;
+
+            while (continueCycle) {
+                int index = template.indexOf(PARAMS[i]);
+
+                if(index > -1) {
+                    indexesAndParamsInRequestString.put(index, PARAMS[i]);
+                    template = template.replace(PARAMS[i], EXCHANGE_PARAMS[i]);
+                } else {
+                    continueCycle = false;
+                }
             }
         }
 
-        SortedSet<Integer> sortedKeySet = new TreeSet<>(indexesAndParams.keySet());
+        SortedSet<Integer> sortedKeySet = new TreeSet<>(indexesAndParamsInRequestString.keySet());
 
         int positionOfParam = 1;
 
         for (Integer indexOfSubstring : sortedKeySet) {
-            urlTemplate = urlTemplate.replace(indexesAndParams.get(indexOfSubstring), ("%" + positionOfParam + "$s"));
-            actualParams.add(indexesAndParams.get(indexOfSubstring));
+            urlTemplate = urlTemplate.replace(indexesAndParamsInRequestString.get(indexOfSubstring), ("%" + positionOfParam + "$s"));
+            actualParamsForCurrentRequest.add(indexesAndParamsInRequestString.get(indexOfSubstring));
 
             positionOfParam++;
         }
@@ -72,11 +86,11 @@ public class JsonRequestUrlBuilderByLocation implements RequestUrlBuilder {
     }
 
     private Object[] prepareArrayParams(Location location) {
-        Object[] params = new Object[actualParams.size()];
+        Object[] params = new Object[actualParamsForCurrentRequest.size()];
 
         int index = 0;
 
-        for (String actualParam : actualParams) {
+        for (String actualParam : actualParamsForCurrentRequest) {
             if(actualParam.equals(KEY)) {
                 params[index] = key;
             } if (actualParam.equals(LATITUDE)) {

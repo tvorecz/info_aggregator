@@ -2,7 +2,9 @@ package epam.labs.dzmitry.zorych.entity;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -14,8 +16,10 @@ public class RateOfExchange {
 
     @Setter
     @Getter
-    private String baseIsoCode;
+    private Currency baseIsoCode;
 
-
+    @Getter
+    @Setter
+    private Map<Currency, BigDecimal> currencies;
 
 }

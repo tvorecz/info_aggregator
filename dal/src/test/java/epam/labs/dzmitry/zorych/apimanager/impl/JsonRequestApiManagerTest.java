@@ -1,9 +1,10 @@
-package epam.labs.dzmitry.zorych.urlbuilder.impl;
+package epam.labs.dzmitry.zorych.apimanager.impl;
 
 import epam.labs.dzmitry.zorych.apimanager.JsonApiManagerException;
 import epam.labs.dzmitry.zorych.apimanager.impl.JsonRequestApiManager;
 import epam.labs.dzmitry.zorych.entity.Location;
 import epam.labs.dzmitry.zorych.urlbuilder.BadUrlApiException;
+import epam.labs.dzmitry.zorych.urlbuilder.impl.JsonRequestUrlBuilderByLocation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
