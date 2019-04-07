@@ -14,7 +14,6 @@ public class JsonRequestUrlBuilderByLocation implements RequestUrlBuilder {
     private final static String ISO_CODE = "${iso_code}";
     private final static String KEY = "${key}";
     private final static String[] PARAMS = {KEY, LATITUDE, LONGITUDE, ISO_CODE};
-    private final static String[] EXCHANGE_PARAMS = {"${***}", "${******}", "${*********}", "${********}"};
 
     private final String urlTemplate;
     private final String key;
@@ -50,39 +49,23 @@ public class JsonRequestUrlBuilderByLocation implements RequestUrlBuilder {
     }
 
     private String prepareUrlTemplate(String urlTemplate) {
-        Map<Integer, String> indexesAndParamsInRequestString = new HashMap<>();
         actualParamsForCurrentRequest = new ArrayList<>();
 
-        boolean continueCycle;
         String template = urlTemplate;
 
-        for (int i = 0; i < PARAMS.length; i++) {
-            continueCycle = true;
+        int index = 1;
 
-            while (continueCycle) {
-                int index = template.indexOf(PARAMS[i]);
+        for (String param : PARAMS) {
+            int offset = template.indexOf(param);
 
-                if(index > -1) {
-                    indexesAndParamsInRequestString.put(index, PARAMS[i]);
-                    template = template.replace(PARAMS[i], EXCHANGE_PARAMS[i]);
-                } else {
-                    continueCycle = false;
-                }
+            if(offset > -1) {
+                template = template.replace(param, ("%" + index + "$s"));
+                actualParamsForCurrentRequest.add(param);
+                index++;
             }
         }
 
-        SortedSet<Integer> sortedKeySet = new TreeSet<>(indexesAndParamsInRequestString.keySet());
-
-        int positionOfParam = 1;
-
-        for (Integer indexOfSubstring : sortedKeySet) {
-            urlTemplate = urlTemplate.replace(indexesAndParamsInRequestString.get(indexOfSubstring), ("%" + positionOfParam + "$s"));
-            actualParamsForCurrentRequest.add(indexesAndParamsInRequestString.get(indexOfSubstring));
-
-            positionOfParam++;
-        }
-
-        return urlTemplate;
+        return template;
     }
 
     private Object[] prepareArrayParams(Location location) {

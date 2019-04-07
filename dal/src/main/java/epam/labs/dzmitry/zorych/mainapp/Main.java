@@ -162,5 +162,9 @@ public class Main {
 
         System.out.println(weather);
 
+        String format = "%2$s, %3$s, %2$s, %1$s, %2$s, %2$s";
+        System.out.println(String.format(format, "1", "2", "3"));
+        JsonElement error = jsonObject.get("error");
+        System.out.println(error);
     }
 }

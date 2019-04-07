@@ -4,6 +4,7 @@ import epam.labs.dzmitry.zorych.apimanager.JsonApiManager;
 import epam.labs.dzmitry.zorych.apimanager.JsonApiManagerException;
 import epam.labs.dzmitry.zorych.dao.JsonDao;
 import epam.labs.dzmitry.zorych.entity.Location;
+import epam.labs.dzmitry.zorych.entitybuilder.DataSourceException;
 import epam.labs.dzmitry.zorych.entitybuilder.EntityBuilder;
 import epam.labs.dzmitry.zorych.urlbuilder.BadUrlApiException;
 
@@ -17,9 +18,10 @@ public class JsonDaoImpl<T> implements JsonDao<T> {
     }
 
     @Override
-    public T getFor(Location location) throws JsonApiManagerException, BadUrlApiException {
+    public T getFor(Location location) throws JsonApiManagerException, BadUrlApiException, DataSourceException {
         String request = jsonApiManager.getRequestFor(location);
         T entity = entityBuilder.build(request);
+
         return entity;
     }
 }

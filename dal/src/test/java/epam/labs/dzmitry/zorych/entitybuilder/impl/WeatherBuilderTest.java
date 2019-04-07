@@ -1,6 +1,7 @@
 package epam.labs.dzmitry.zorych.entitybuilder.impl;
 
 import epam.labs.dzmitry.zorych.entity.Weather;
+import epam.labs.dzmitry.zorych.entitybuilder.DataSourceException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,6 +15,8 @@ public class WeatherBuilderTest {
                                        "\"pressure\":1018.28,\"windSpeed\":14.08,\"windGust\":27.96," +
                                        "\"windBearing\":115,\"cloudCover\":0.67,\"uvIndex\":0,\"visibility\":6.22," +
                                        "\"ozone\":378.28},\"offset\":3}";
+
+    private final static String JSON_ERROR = "{\"code\":400,\"error\":\"The given location is invalid.\"}";
 
     private static Weather exceptedWeather;
 
@@ -31,9 +34,17 @@ public class WeatherBuilderTest {
     }
 
     @Test
-    public void testWeatherBuilder() {
+    public void testWeatherBuilder() throws DataSourceException {
         WeatherBuilder weatherBuilder = new WeatherBuilder();
         Weather actualWeather = weatherBuilder.build(JSON);
+
         Assert.assertEquals(actualWeather, exceptedWeather);
     }
+
+    @Test(expected = DataSourceException.class)
+    public void testWeatherBuilderException() throws DataSourceException {
+        WeatherBuilder weatherBuilder = new WeatherBuilder();
+        weatherBuilder.build(JSON_ERROR);
+    }
+
 }

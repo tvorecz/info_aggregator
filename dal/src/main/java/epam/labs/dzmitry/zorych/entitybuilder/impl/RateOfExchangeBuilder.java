@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import epam.labs.dzmitry.zorych.entity.Currency;
 import epam.labs.dzmitry.zorych.entity.RateOfExchange;
+import epam.labs.dzmitry.zorych.entitybuilder.DataSourceException;
 import epam.labs.dzmitry.zorych.entitybuilder.EntityBuilder;
 
 import java.math.BigDecimal;
@@ -17,10 +18,17 @@ public class RateOfExchangeBuilder implements EntityBuilder<RateOfExchange> {
     private final static Currency[] CURRENCIES = {Currency.EUR, Currency.USD, Currency.GBP, Currency.CNY};
 
     @Override
-    public RateOfExchange build(String json) {
+    public RateOfExchange build(String json) throws DataSourceException {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonRoot = jsonParser.parse(json);
         JsonObject jsonObject = jsonRoot.getAsJsonObject();
+
+        JsonElement error = jsonObject.get("error");
+
+        if(error != null) {
+            JsonElement status = jsonObject.get("status");
+            throw new DataSourceException("Status: " + status.getAsInt() + "\nMessage: " + error.getAsString());
+        }
 
         Set<String> keySet = jsonObject.keySet();
         String base = (keySet.toArray(new String[keySet.size()]))[0].substring(0, 3);

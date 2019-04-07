@@ -4,15 +4,23 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import epam.labs.dzmitry.zorych.entity.Location;
+import epam.labs.dzmitry.zorych.entitybuilder.DataSourceException;
 import epam.labs.dzmitry.zorych.entitybuilder.EntityBuilder;
 
 public class LocationBuilder implements EntityBuilder<Location> {
 
     @Override
-    public Location build(String json) {
+    public Location build(String json) throws DataSourceException {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonRoot = jsonParser.parse(json);
         JsonObject jsonObject = jsonRoot.getAsJsonObject();
+
+        int code = jsonObject.get("status").getAsJsonObject().get("code").getAsInt();
+
+        if(code != 200) {
+            String message = jsonObject.get("status").getAsJsonObject().get("message").getAsString();
+            throw new DataSourceException("Status: " + code + "\nMessage: " + message);
+        }
 
         Location location = new Location();
 

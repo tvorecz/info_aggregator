@@ -4,15 +4,23 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import epam.labs.dzmitry.zorych.entity.Weather;
+import epam.labs.dzmitry.zorych.entitybuilder.DataSourceException;
 import epam.labs.dzmitry.zorych.entitybuilder.EntityBuilder;
 
 public class WeatherBuilder implements EntityBuilder<Weather> {
 
     @Override
-    public Weather build(String json) {
+    public Weather build(String json) throws DataSourceException {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonRoot = jsonParser.parse(json);
         JsonObject jsonObject = jsonRoot.getAsJsonObject();
+
+        JsonElement error = jsonObject.get("error");
+
+        if(error != null) {
+            JsonElement status = jsonObject.get("code");
+            throw new DataSourceException("Code: " + status.getAsInt() + "\nMessage: " + error.getAsString());
+        }
 
         Weather weather = new Weather();
 

@@ -1,6 +1,7 @@
 package epam.labs.dzmitry.zorych.entitybuilder.impl;
 
 import epam.labs.dzmitry.zorych.entity.Location;
+import epam.labs.dzmitry.zorych.entitybuilder.DataSourceException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -151,6 +152,41 @@ public class LocationBuilderTest {
                                        "   \"total_results\" : 1\n" +
                                        "}";
 
+    private final static String JSON_ERROR = "{\n" +
+                                             "   \"documentation\" : \"https://opencagedata.com/api\",\n" +
+                                             "   \"licenses\" : [\n" +
+                                             "      {\n" +
+                                             "         \"name\" : \"CC-BY-SA\",\n" +
+                                             "         \"url\" : \"https://creativecommons.org/licenses/by-sa/3" +
+                                             ".0/\"\n" +
+                                             "      },\n" +
+                                             "      {\n" +
+                                             "         \"name\" : \"ODbL\",\n" +
+                                             "         \"url\" : \"https://opendatacommons" +
+                                             ".org/licenses/odbl/summary/\"\n" +
+                                             "      }\n" +
+                                             "   ],\n" +
+                                             "   \"rate\" : {\n" +
+                                             "      \"limit\" : 2500,\n" +
+                                             "      \"remaining\" : 2498,\n" +
+                                             "      \"reset\" : 1554681600\n" +
+                                             "   },\n" +
+                                             "   \"results\" : [],\n" +
+                                             "   \"status\" : {\n" +
+                                             "      \"code\" : 400,\n" +
+                                             "      \"message\" : \"invalid coordinates\"\n" +
+                                             "   },\n" +
+                                             "   \"stay_informed\" : {\n" +
+                                             "      \"blog\" : \"https://blog.opencagedata.com\",\n" +
+                                             "      \"twitter\" : \"https://twitter.com/opencagedata\"\n" +
+                                             "   },\n" +
+                                             "   \"thanks\" : \"For using an OpenCage Data API\",\n" +
+                                             "   \"timestamp\" : {\n" +
+                                             "      \"created_http\" : \"Sun, 07 Apr 2019 10:14:57 GMT\",\n" +
+                                             "      \"created_unix\" : 1554632097\n" +
+                                             "   },\n" +
+                                             "   \"total_results\" : 0\n" +
+                                             "}\n";
 
     private static Location expectedLocation;
 
@@ -168,10 +204,16 @@ public class LocationBuilderTest {
     }
 
     @Test
-    public void testLocationBuilder() {
+    public void testLocationBuilder() throws DataSourceException {
         LocationBuilder locationBuilder = new LocationBuilder();
         Location actualLocation = locationBuilder.build(JSON);
 
         Assert.assertEquals(actualLocation, expectedLocation);
+    }
+
+    @Test(expected = DataSourceException.class)
+    public void testLocationBuilderException() throws DataSourceException {
+        LocationBuilder locationBuilder = new LocationBuilder();
+        locationBuilder.build(JSON_ERROR);
     }
 }
