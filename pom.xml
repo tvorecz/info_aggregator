@@ -10,6 +10,7 @@
     <modules>
         <module>dal</module>
         <module>entity</module>
+        <module>rest</module>
     </modules>
     <packaging>pom</packaging>
 
