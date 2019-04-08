@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <h1>Results</h1>
+
+        <h2>Weather</h2>
+
+        <div>Summary: $summary<br />
+            Temperature: $temperature<br />
+            Apparent Temperature: $apparentTemperature<br />
+            Pressure: $pressure<br />
+            Wind Speed: $windSpeed<br />
+            Wind Gust: $windGust<br /></div>
+
+        <h2>Currency</h2>
+
+        <div>"$base_$currency":$currencyValue</div>
+
+        <h2>Location</h2>
+
+        <div></div>
+
+
+        <ul>
+            #foreach( $key in $allProducts.keySet() )
+                <li>Key: $key -> Value: $allProducts.get($key)</li>
+            #end
+        </ul>
+
+        #parse( "me.vm" )
+    </body>
+</html>

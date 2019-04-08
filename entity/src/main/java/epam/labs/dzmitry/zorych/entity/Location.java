@@ -4,12 +4,22 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class Location implements Serializable {
     private static final long serialVersionUID = -4952413286235286159L;
+
+    public Location(BigDecimal latitude, BigDecimal longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    @Setter
+    @Getter
+    private LocalDate date;
 
     @Setter
     @Getter
@@ -25,7 +35,7 @@ public class Location implements Serializable {
 
     @Getter
     @Setter
-    private String isoCode;
+    private Currency currencyCode;
 
     @Getter
     @Setter

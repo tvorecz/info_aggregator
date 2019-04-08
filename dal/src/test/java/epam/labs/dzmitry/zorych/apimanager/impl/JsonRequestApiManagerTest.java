@@ -1,10 +1,9 @@
 package epam.labs.dzmitry.zorych.apimanager.impl;
 
 import epam.labs.dzmitry.zorych.apimanager.JsonApiManagerException;
-import epam.labs.dzmitry.zorych.apimanager.impl.JsonRequestApiManager;
 import epam.labs.dzmitry.zorych.entity.Location;
-import epam.labs.dzmitry.zorych.urlbuilder.BadUrlApiException;
-import epam.labs.dzmitry.zorych.urlbuilder.impl.JsonRequestUrlBuilderByLocation;
+import epam.labs.dzmitry.zorych.urlcreator.BadUrlApiException;
+import epam.labs.dzmitry.zorych.urlcreator.impl.JsonRequestUrlCreatorByLocation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 public class JsonRequestApiManagerTest {
     private static URL mockUrl;
-    private static JsonRequestUrlBuilderByLocation mockUrlBuilder;
+    private static JsonRequestUrlCreatorByLocation mockUrlBuilder;
     private static URLConnection mockUrlConnection;
     private static Location location;
 
@@ -28,7 +27,7 @@ public class JsonRequestApiManagerTest {
         location = new Location();
 
         mockUrl = Mockito.mock(URL.class);
-        mockUrlBuilder = Mockito.mock(JsonRequestUrlBuilderByLocation.class);
+        mockUrlBuilder = Mockito.mock(JsonRequestUrlCreatorByLocation.class);
         mockUrlConnection = Mockito.mock(URLConnection.class);
 
         Mockito.when(mockUrl.openConnection()).thenReturn(mockUrlConnection);
@@ -38,7 +37,7 @@ public class JsonRequestApiManagerTest {
         Mockito.when(mockUrlConnection.getInputStream()).thenReturn(stream);
         Mockito.when(mockUrlConnection.getContentType()).thenReturn("charset=utf-8");
 
-        Mockito.when(mockUrlBuilder.buildURL(location)).thenReturn(mockUrl);
+        Mockito.when(mockUrlBuilder.createURL(location)).thenReturn(mockUrl);
     }
 
     @Test

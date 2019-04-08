@@ -1,0 +1,46 @@
+{
+#if($isWeather)
+"weather":
+{"summary":"$summary",
+"temperature":$temperature,
+"apparentTemperature":$apparentTemperature,
+"pressure":$pressure,
+"windSpeed":$windSpeed,
+"windGust":$windGust,
+"icon":$icon
+}
+    #if(($isWeather && $isCurrency) || ($isWeather && $isLocation))
+    ,
+    #end
+#end
+
+
+
+#if($isCurrency)
+"currency":
+{
+    #foreach($key in $currencies.keySet())
+    "base":$base
+    "$key":$currencies.get($key)
+    #end
+}
+    #if($isLocation)
+    ,
+    #end
+#end
+
+#if($isLocation)
+"location":{
+"date":"$date",
+"latitude":$latitude,
+"longitude":$longitude,
+"timeZone":$timeZone,
+"isoCode":$isoCode,
+"continent":$continent,
+"country":$country,
+"city":$city
+}
+#end
+
+
+}

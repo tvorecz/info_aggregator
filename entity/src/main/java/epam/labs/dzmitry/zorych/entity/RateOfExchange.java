@@ -3,7 +3,6 @@ package epam.labs.dzmitry.zorych.entity;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Map;
 
 @NoArgsConstructor
@@ -12,11 +11,7 @@ import java.util.Map;
 public class RateOfExchange {
     @Setter
     @Getter
-    private LocalDate date;
-
-    @Setter
-    @Getter
-    private Currency baseIsoCode;
+    private Location location;
 
     @Getter
     @Setter

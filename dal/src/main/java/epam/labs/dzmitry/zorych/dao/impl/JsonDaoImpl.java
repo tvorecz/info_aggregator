@@ -4,23 +4,23 @@ import epam.labs.dzmitry.zorych.apimanager.JsonApiManager;
 import epam.labs.dzmitry.zorych.apimanager.JsonApiManagerException;
 import epam.labs.dzmitry.zorych.dao.JsonDao;
 import epam.labs.dzmitry.zorych.entity.Location;
-import epam.labs.dzmitry.zorych.entitybuilder.DataSourceException;
-import epam.labs.dzmitry.zorych.entitybuilder.EntityBuilder;
-import epam.labs.dzmitry.zorych.urlbuilder.BadUrlApiException;
+import epam.labs.dzmitry.zorych.entitycreator.DataSourceException;
+import epam.labs.dzmitry.zorych.entitycreator.EntityCreator;
+import epam.labs.dzmitry.zorych.urlcreator.BadUrlApiException;
 
 public class JsonDaoImpl<T> implements JsonDao<T> {
     private JsonApiManager jsonApiManager;
-    private EntityBuilder<T> entityBuilder;
+    private EntityCreator<T> entityCreator;
 
-    public JsonDaoImpl(JsonApiManager jsonApiManager, EntityBuilder<T> entityBuilder) {
+    public JsonDaoImpl(JsonApiManager jsonApiManager, EntityCreator<T> entityCreator) {
         this.jsonApiManager = jsonApiManager;
-        this.entityBuilder = entityBuilder;
+        this.entityCreator = entityCreator;
     }
 
     @Override
     public T getFor(Location location) throws JsonApiManagerException, BadUrlApiException, DataSourceException {
         String request = jsonApiManager.getRequestFor(location);
-        T entity = entityBuilder.build(request);
+        T entity = entityCreator.create(request);
 
         return entity;
     }

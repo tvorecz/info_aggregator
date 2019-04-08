@@ -1,0 +1,7 @@
+Velocity:
+template = $template,
+weather = $weather,
+currency = $currency,
+location = $location,
+latitude = $latitude,
+longitude = $longitude

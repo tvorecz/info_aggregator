@@ -1,11 +1,16 @@
 package epam.labs.dzmitry.zorych.mainapp;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import epam.labs.dzmitry.zorych.apimanager.JsonApiManagerException;
+import epam.labs.dzmitry.zorych.config.DalConfig;
+import epam.labs.dzmitry.zorych.dao.JsonDao;
 import epam.labs.dzmitry.zorych.entity.Location;
 import epam.labs.dzmitry.zorych.entity.Weather;
+import epam.labs.dzmitry.zorych.entitycreator.DataSourceException;
+import epam.labs.dzmitry.zorych.urlcreator.BadUrlApiException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,8 +19,6 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.SimpleTimeZone;
-import java.util.TimeZone;
 
 public class Main {
     private final static String locationUrl =
@@ -27,7 +30,36 @@ public class Main {
             "http://data.fixer.io/api/latest?access_key=4078f5c77901a5b2e6fe0b87ab5247a4&format=1";
 
     public static void main(String[] args) {
-        readJsonByLibrary();
+//        readJsonByLibrary();
+
+        Main  main = new Main();
+        try {
+            main.springTest();
+        } catch (DataSourceException e) {
+            e.printStackTrace();
+        } catch (JsonApiManagerException e) {
+            e.printStackTrace();
+        } catch (BadUrlApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void springTest() throws DataSourceException, JsonApiManagerException, BadUrlApiException {
+        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext();
+        annotationConfigApplicationContext.register(DalConfig.class);
+        annotationConfigApplicationContext.refresh();
+
+        JsonDao<Location> locationJsonDao = (JsonDao<Location>) annotationConfigApplicationContext.getBean("locationDao");
+
+        Location location = new Location();
+
+        location.setLatitude(BigDecimal.valueOf(53.9045));
+        location.setLongitude(BigDecimal.valueOf(27.5615));
+
+
+        Location actualLoc = locationJsonDao.getFor(location);
+
+        System.out.println(actualLoc);
     }
 
 

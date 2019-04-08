@@ -3,8 +3,8 @@ package epam.labs.dzmitry.zorych.apimanager.impl;
 import epam.labs.dzmitry.zorych.apimanager.JsonApiManager;
 import epam.labs.dzmitry.zorych.apimanager.JsonApiManagerException;
 import epam.labs.dzmitry.zorych.entity.Location;
-import epam.labs.dzmitry.zorych.urlbuilder.BadUrlApiException;
-import epam.labs.dzmitry.zorych.urlbuilder.RequestUrlBuilder;
+import epam.labs.dzmitry.zorych.urlcreator.BadUrlApiException;
+import epam.labs.dzmitry.zorych.urlcreator.RequestUrlCreator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class JsonRequestApiManager implements JsonApiManager {
-    private RequestUrlBuilder urlBuilder;
+    private RequestUrlCreator urlBuilder;
 
-    public JsonRequestApiManager(RequestUrlBuilder urlBuilder) {
+    public JsonRequestApiManager(RequestUrlCreator urlBuilder) {
         this.urlBuilder = urlBuilder;
     }
 
@@ -26,7 +26,7 @@ public class JsonRequestApiManager implements JsonApiManager {
         String charset = null;
         URLConnection urlConnection = null;
 
-        URL url = urlBuilder.buildURL(location);
+        URL url = urlBuilder.createURL(location);
 
         JsonApiManagerException jsonApiManagerException = null;
 
