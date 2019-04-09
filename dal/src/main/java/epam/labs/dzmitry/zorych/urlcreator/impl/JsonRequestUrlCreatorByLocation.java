@@ -36,7 +36,7 @@ public class JsonRequestUrlCreatorByLocation implements RequestUrlCreator {
         try {
             url = new URL(fillUrlTemplate(location));
         } catch (MalformedURLException e) {
-            throw new BadUrlApiException("Bad url to api!", e);
+            throw new BadUrlApiException("Bad url to api!", e, 400);
         }
 
         return url;

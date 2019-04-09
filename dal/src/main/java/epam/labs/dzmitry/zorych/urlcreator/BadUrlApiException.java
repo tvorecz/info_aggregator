@@ -3,6 +3,12 @@ package epam.labs.dzmitry.zorych.urlcreator;
 public class BadUrlApiException extends Exception {
     private static final long serialVersionUID = 2946267101568276417L;
 
+    private int code;
+
+    public int getCode() {
+        return code;
+    }
+
     public BadUrlApiException() {
     }
 
@@ -16,5 +22,15 @@ public class BadUrlApiException extends Exception {
 
     public BadUrlApiException(Throwable cause) {
         super(cause);
+    }
+
+    public BadUrlApiException(String message, int code) {
+        super(message);
+        this.code = code;
+    }
+
+    public BadUrlApiException(String message, Throwable cause, int code) {
+        super(message, cause);
+        this.code = code;
     }
 }

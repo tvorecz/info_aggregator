@@ -40,7 +40,7 @@ public class JsonRequestApiManager implements JsonApiManager {
                 stream = urlConnection.getInputStream();
                 resultRequest = createJsonString(stream, charset);
             } catch (IOException e) {
-                jsonApiManagerException = new JsonApiManagerException("Cannot to receive data!", e);
+                jsonApiManagerException = new JsonApiManagerException("Cannot to receive data!", e, 404);
                 throw jsonApiManagerException;
             } finally {
                 if(stream != null) {

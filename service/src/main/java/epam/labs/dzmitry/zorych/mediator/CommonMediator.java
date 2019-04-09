@@ -4,5 +4,5 @@ import epam.labs.dzmitry.zorych.entity.RequestParam;
 import epam.labs.dzmitry.zorych.entity.ResponseParam;
 
 public interface CommonMediator {
-    ResponseParam get(RequestParam requestParam) throws InvalidParameterException;
+    ResponseParam get(RequestParam requestParam) throws InvalidParameterException, ReceivingDataIsFailedException;
 }
