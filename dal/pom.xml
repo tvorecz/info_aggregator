@@ -17,6 +17,11 @@
             <artifactId>entity</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>epam.labs.dzmitry.zorych</groupId>
+            <artifactId>aspect</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 

@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class RateOfExchangeCreatorFromCurrencyconverterapi implements EntityCreator<RateOfExchange> {
-    private final static Currency[] CURRENCIES = {Currency.EUR, Currency.USD, Currency.GBP, Currency.CNY};
+    private final static Currency[] CURRENCIES = {Currency.EUR, Currency.USD, Currency.RUB, Currency.GBP, Currency.CNY};
 
     @Override
     public RateOfExchange create(String json) throws DataSourceException {

@@ -1,8 +1,10 @@
 package epam.labs.dzmitry.zorych.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import epam.labs.dzmitry.zorych.mediator.CommonMediator;
+import epam.labs.dzmitry.zorych.mediator.impl.ServiceMediator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
+@EnableAspectJAutoProxy
+@Import({ServiceConfig.class})
 @ComponentScan(basePackages = "epam.labs.dzmitry.zorych.controller")
 public class RestConfig implements WebMvcConfigurer {
 
@@ -20,6 +24,10 @@ public class RestConfig implements WebMvcConfigurer {
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        registry.addResourceHandler("/WEB-INF/").addResourceLocations("/WEB-INF/");
 //    }
+
+
+    @Autowired
+    public CommonMediator serviceMediator;
 
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
@@ -29,6 +37,8 @@ public class RestConfig implements WebMvcConfigurer {
 //        viewResolver.setViewClass(JstlView.class);
         return viewResolver;
     }
+
+
 
 //    @Bean
 //    public DispatcherServlet dispatcherServlet() {

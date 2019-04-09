@@ -1,0 +1,20 @@
+
+        #if($responseParam.isWeather())
+        Weather:
+            $responseParam.getWeather().toString()
+
+        #end
+
+
+        #if($responseParam.isCurrency())
+        Currency
+            $responseParam.getRateOfExchange().toString()
+
+        #end
+
+
+        #if($responseParam.isLocation())
+        Location
+            $responseParam.getLocation().toString()
+
+        #end

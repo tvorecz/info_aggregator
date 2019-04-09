@@ -7,14 +7,14 @@ import epam.labs.dzmitry.zorych.entity.Weather;
 import epam.labs.dzmitry.zorych.factory.AbstractDaoFactory;
 import epam.labs.dzmitry.zorych.factory.impl.DaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
 import java.lang.reflect.InvocationTargetException;
 
 @Configuration
+@Import(AspectConfiguration.class)
+@EnableAspectJAutoProxy
 @PropertySource("classpath:source_settings.properties")
 public class DalConfig {
     @Autowired

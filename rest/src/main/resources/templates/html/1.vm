@@ -4,30 +4,48 @@
 
         <h1>Results</h1>
 
-        <h2>Weather</h2>
 
-        <div>Summary: $summary<br />
-            Temperature: $temperature<br />
-            Apparent Temperature: $apparentTemperature<br />
-            Pressure: $pressure<br />
-            Wind Speed: $windSpeed<br />
-            Wind Gust: $windGust<br /></div>
+        #if($responseParam.isWeather())
+            <div>
+                <h2>Weather</h2>
+                <b>Summary:</b> $responseParam.getWeather().getSummary()<br />
+                <b>Temperature:</b> $responseParam.getWeather().getTemperature()<br />
+                <b>Apparent Temperature:</b> $responseParam.getWeather().getApparentTemperature()<br />
+                <b>Pressure:</b> $responseParam.getWeather().getPressure()<br />
+                <b>Wind Speed:</b> $responseParam.getWeather().getWindSpeed()<br />
+                <b>Wind Gust:</b> $responseParam.getWeather().getWindGust()<br />
+                <b>Icon:</b> $responseParam.getWeather().getIcon()<br />
+            </div>
 
-        <h2>Currency</h2>
-
-        <div>"$base_$currency":$currencyValue</div>
-
-        <h2>Location</h2>
-
-        <div></div>
+        #end
 
 
-        <ul>
-            #foreach( $key in $allProducts.keySet() )
-                <li>Key: $key -> Value: $allProducts.get($key)</li>
-            #end
-        </ul>
+        #if($responseParam.isCurrency())
+            <div>
+                <h2>Currency</h2>
+                <b>Base:</b> $responseParam.getLocation().getCurrencyCode()<br />
+                #foreach($key in $responseParam.getRateOfExchange().getCurrencies().keySet())
 
-        #parse( "me.vm" )
+                    <b>$key:</b> $responseParam.getRateOfExchange().getCurrencies().get($key)<br />
+                #end
+            </div>
+
+        #end
+
+
+        #if($responseParam.isLocation())
+            <div>
+                <h2>Location</h2>
+                <b>Date:</b> $responseParam.getLocation().getDate()<br />
+                <b>Latitude:</b> $responseParam.getLocation().getLatitude()<br />
+                <b>Longitude:</b> $responseParam.getLocation().getLongitude()<br />
+                <b>TimeZone:</b> $responseParam.getLocation().getTimeZone()<br />
+                <b>IsoCode:</b> $responseParam.getLocation().getCurrencyCode()<br />
+                <b>Continent:</b> $responseParam.getLocation().getContinent()<br />
+                <b>Country:</b> $responseParam.getLocation().getCountry()<br />
+                <b>City:</b> $responseParam.getLocation().getCity()<br />
+            </div>
+
+        #end
     </body>
 </html>

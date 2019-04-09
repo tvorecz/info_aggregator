@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Error</h1>
+        <b>Code:</b> $responseParam.code<br/>
+        <b>Message:</b> $responseParam.message<br/>
+    </body>
+</html>

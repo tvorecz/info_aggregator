@@ -11,6 +11,10 @@ import epam.labs.dzmitry.zorych.urlcreator.BadUrlApiException;
 public class CommonServiceImpl<T> implements CommonService<T> {
     private JsonDao<T> dao;
 
+    public CommonServiceImpl(JsonDao<T> dao) {
+        this.dao = dao;
+    }
+
     @Override
     public T get(Location location) throws CannotGetDataException {
         T result = null;

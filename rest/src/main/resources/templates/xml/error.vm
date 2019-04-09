@@ -1,0 +1,8 @@
+<error>
+    <code>
+        $responseParam.code
+    </code>
+    <message>
+        $responseParam.message
+    </message>
+</error>

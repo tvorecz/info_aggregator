@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<aggregation>
+
+#if($responseParam.isWeather())
+    <weather>
+        <summary>$responseParam.getWeather().getSummary()</summary>
+        <temperature>$responseParam.getWeather().getTemperature()</temperature>
+        <apparentTemperature>$responseParam.getWeather().getApparentTemperature()</apparentTemperature>
+        <pressure>$responseParam.getWeather().getPressure()</pressure>
+        <windSpeed>$responseParam.getWeather().getWindSpeed()</windSpeed>
+        <windGust>$responseParam.getWeather().getWindGust()</windGust>
+        <icon>$responseParam.getWeather().getIcon()</icon>
+</weather>
+#end
+
+#if($responseParam.isCurrency())
+<currency>
+<base>$responseParam.getLocation().getCurrencyCode()</base>
+<rates>
+#foreach($key in $responseParam.getRateOfExchange().getCurrencies().keySet())
+<rate key="$key">$responseParam.getRateOfExchange().getCurrencies().get($key)</rate>
+#end
+</rates>
+</currency>
+#end
+
+#if($responseParam.isLocation())
+
+<location>
+<date>$responseParam.getLocation().getDate()</date>
+<latitude>$responseParam.getLocation().getLatitude()</latitude>
+<longitude>$responseParam.getLocation().getLongitude()</longitude>
+<timeZone>$responseParam.getLocation().getTimeZone()</timeZone>
+<isoCode>$responseParam.getLocation().getCurrencyCode()</isoCode>
+<continent>$responseParam.getLocation().getContinent()</continent>
+<country>$responseParam.getLocation().getCountry()</country>
+<city>$responseParam.getLocation().getCity()</city>
+</location>
+#end
+
+</aggregation>

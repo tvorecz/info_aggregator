@@ -40,19 +40,26 @@ public class ServiceMediator implements CommonMediator {
                 Location location = locationService.get(locationForFill);
 
                 response.setLocation(location);
-                response.setLocation(true);
+                response.setIsLocation(requestParam.isLocation());
 
                 if(requestParam.isWeather()) {
                     weather = weatherService.get(location);
 
+                    weather.setLocation(location);
+
                     response.setWeather(weather);
-                    response.setWeather(true);
+                    response.setIsWeather(true);
                 }
 
                 if(requestParam.isCurrency()) {
-                    currency = rateOfExchangeService.get(location);
-                    response.setRateOfExchange(currency);
-                    response.setCurrency(true);
+                    if(location.getCurrencyCode() != null) {
+                        currency = rateOfExchangeService.get(location);
+                        currency.setLocation(location);
+                        response.setRateOfExchange(currency);
+                        response.setIsCurrency(true);
+                    } else {
+                        throw new ReceivingDataIsFailedException("No iso code.", 404);
+                    }
                 }
             } catch (CannotGetDataException e) {
                 throw new ReceivingDataIsFailedException("Receiving data is failed.", e, e.getCode());

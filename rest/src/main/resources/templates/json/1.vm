@@ -1,44 +1,53 @@
 {
-#if($isWeather)
+#if($responseParam.isWeather())
 "weather":
-{"summary":"$summary",
-"temperature":$temperature,
-"apparentTemperature":$apparentTemperature,
-"pressure":$pressure,
-"windSpeed":$windSpeed,
-"windGust":$windGust,
-"icon":$icon
+{"summary":"$responseParam.getWeather().getSummary()",
+"temperature":$responseParam.getWeather().getTemperature(),
+"apparentTemperature":$responseParam.getWeather().getApparentTemperature(),
+"pressure":$responseParam.getWeather().getPressure(),
+"windSpeed":$responseParam.getWeather().getWindSpeed(),
+"windGust":$responseParam.getWeather().getWindGust(),
+"icon":"$responseParam.getWeather().getIcon()"
 }
-    #if(($isWeather && $isCurrency) || ($isWeather && $isLocation))
+    #if(($responseParam.isWeather() && $responseParam.isCurrency()) || ($responseParam.isWeather() && $responseParam.isLocation()))
     ,
     #end
 #end
 
 
 
-#if($isCurrency)
+#if($responseParam.isCurrency())
 "currency":
 {
-    #foreach($key in $currencies.keySet())
-    "base":$base
-    "$key":$currencies.get($key)
+    "base":"$responseParam.getLocation().getCurrencyCode()",
+
+    #set($count = 0)
+    #set($size = $responseParam.getRateOfExchange().getCurrencies().keySet().size())
+
+    #foreach($key in $responseParam.getRateOfExchange().getCurrencies().keySet())
+    "$key":$responseParam.getRateOfExchange().getCurrencies().get($key)
+        #if($count < $size - 1)
+            ,
+            #set($count = $count + 1)
+        #end
+
     #end
 }
-    #if($isLocation)
+    #if($responseParam.isLocation())
     ,
     #end
 #end
 
-#if($isLocation)
+#if($responseParam.isLocation())
 "location":{
-"date":"$date",
-"latitude":$latitude,
-"longitude":$longitude,
-"timeZone":$timeZone,
-"isoCode":$isoCode,
-"continent":$continent,
-"country":$country,
-"city":$city
+"date":"$responseParam.getLocation().getDate()",
+"latitude":$responseParam.getLocation().getLatitude(),
+"longitude":$responseParam.getLocation().getLongitude(),
+"timeZone":"$responseParam.getLocation().getTimeZone()",
+"isoCode":"$responseParam.getLocation().getCurrencyCode()",
+"continent":"$responseParam.getLocation().getContinent()",
+"country":"$responseParam.getLocation().getCountry()",
+"city":"$responseParam.getLocation().getCity()"
 }
 #end
 
