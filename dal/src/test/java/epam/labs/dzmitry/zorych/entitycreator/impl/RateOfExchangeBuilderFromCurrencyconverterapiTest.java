@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class RateOfExchangeBuilderFromCurrencyconverterapiTest {
     private final static String JSON = "{\"BYN_USD\":0.467563,\"BYN_EUR\":0.416257,\"BYN_GBP\":0.358616,\"BYN_CNY\":3" +
-                                       ".141042}";
+                                       ".141042,\"BYN_RUB\":3.121111}";
     private final static String JSON_ERROR = "{\"status\":400,\"error\":\"Invalid query format.\"}";
 
     private static RateOfExchange exceptedRateOfExchange;
@@ -28,6 +28,7 @@ public class RateOfExchangeBuilderFromCurrencyconverterapiTest {
         currencies.put(Currency.EUR, BigDecimal.valueOf(0.416257));
         currencies.put(Currency.GBP, BigDecimal.valueOf(0.358616));
         currencies.put(Currency.CNY, BigDecimal.valueOf(3.141042));
+        currencies.put(Currency.RUB, BigDecimal.valueOf(3.121111));
 
         exceptedRateOfExchange.setCurrencies(currencies);
     }

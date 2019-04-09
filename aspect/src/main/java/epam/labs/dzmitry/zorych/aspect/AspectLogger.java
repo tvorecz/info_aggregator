@@ -9,12 +9,15 @@ import org.slf4j.LoggerFactory;
 @Aspect
 public class AspectLogger {
     private final static Logger EXCEPTION_LOGGER = LoggerFactory.getLogger(AspectLogger.class);
+    private static int iter = 0;
 
     public AspectLogger() {
         EXCEPTION_LOGGER.error("Construct");
+        ++iter;
+        EXCEPTION_LOGGER.error(Integer.toString(iter));
     }
 
-    @Pointcut("execution(* epam.labs.dzmitry.zorych.dao.impl.*.*(..)) && execution(* epam.labs.dzmitry.zorych.mediator.impl.*.*(..))")
+    @Pointcut("execution(* epam.labs.dzmitry.zorych.dao.*.*.*(..)) && execution(* epam.labs.dzmitry.zorych.mediator.*.*.*(..))")
     private void logExceptions() {}
 
 

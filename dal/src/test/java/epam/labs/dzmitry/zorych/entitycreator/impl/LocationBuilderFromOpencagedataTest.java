@@ -209,6 +209,8 @@ public class LocationBuilderFromOpencagedataTest {
         LocationCreatorFromOpencagedata locationBuilderFromOpencagedata = new LocationCreatorFromOpencagedata();
         Location actualLocation = locationBuilderFromOpencagedata.create(JSON);
 
+        expectedLocation.setDate(actualLocation.getDate());
+
         Assert.assertEquals(actualLocation, expectedLocation);
     }
 

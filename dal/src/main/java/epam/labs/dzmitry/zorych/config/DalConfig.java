@@ -13,7 +13,7 @@ import org.springframework.core.env.Environment;
 import java.lang.reflect.InvocationTargetException;
 
 @Configuration
-@Import(AspectConfiguration.class)
+@Import(AspectConfig.class)
 @EnableAspectJAutoProxy
 @PropertySource("classpath:source_settings.properties")
 public class DalConfig {

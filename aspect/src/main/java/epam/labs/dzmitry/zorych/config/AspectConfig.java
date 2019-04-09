@@ -7,7 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableAspectJAutoProxy()
-public class AspectConfiguration {
+public class AspectConfig {
     @Bean
     public AspectLogger aspectLogger() {
         return new AspectLogger();
