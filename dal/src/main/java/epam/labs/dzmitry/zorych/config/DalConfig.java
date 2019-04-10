@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
-import java.lang.reflect.InvocationTargetException;
-
 @Configuration
 @Import(AspectConfig.class)
 @EnableAspectJAutoProxy

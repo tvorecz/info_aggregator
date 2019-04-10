@@ -25,6 +25,7 @@ public class DaoFactory implements AbstractDaoFactory {
     private final Map<String, String> providers;
 
     public DaoFactory() {
+        System.out.println("Dao Factory created!");
         providers= new HashMap<>();
         providers.put("darksky", "epam.labs.dzmitry.zorych.entitycreator.impl.WeatherCreatorFromDarksky");
         providers.put("currencyconverterapi", "epam.labs.dzmitry.zorych.entitycreator.impl.RateOfExchangeCreatorFromCurrencyconverterapi");
