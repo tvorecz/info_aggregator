@@ -6,6 +6,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Aspect for logging errors
+ */
 @Aspect
 public class AspectLogger {
     private final static Logger EXCEPTION_LOGGER = LoggerFactory.getLogger(AspectLogger.class);
@@ -21,6 +24,11 @@ public class AspectLogger {
     private void logExceptions() {}
 
 
+    /**
+     * Logging errors using Spring Aspect
+     * @param ex Exception for logging
+     * @throws Throwable
+     */
     @AfterThrowing(value = "logExceptions()", throwing = "ex")
     public void logException(Exception ex) throws Throwable {
         EXCEPTION_LOGGER.error("Repository error: ", ex);

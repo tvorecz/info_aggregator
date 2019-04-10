@@ -7,6 +7,9 @@ import epam.labs.dzmitry.zorych.entity.Weather;
 import epam.labs.dzmitry.zorych.entitycreator.DataSourceException;
 import epam.labs.dzmitry.zorych.entitycreator.EntityCreator;
 
+/**
+ * Create Weather from json-string, receiving from Darksky
+ */
 public class WeatherCreatorFromDarksky implements EntityCreator<Weather> {
 
     @Override

@@ -2,6 +2,7 @@ package epam.labs.dzmitry.zorych.controller;
 
 import epam.labs.dzmitry.zorych.entity.ErrorInformation;
 import epam.labs.dzmitry.zorych.entity.ResponseParam;
+import epam.labs.dzmitry.zorych.mediator.CommonServiceMediator;
 import epam.labs.dzmitry.zorych.mediator.InvalidParameterException;
 import epam.labs.dzmitry.zorych.mediator.ReceivingDataIsFailedException;
 import epam.labs.dzmitry.zorych.mediator.impl.ServiceMediator;
@@ -18,15 +19,18 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Properties;
 
+/**
+ * Receives requests to rest-service
+ */
 @RestController
 public class InfoAggregatorController {
     private final static String urlModel = "/info/json/1?weather=true&currency=true&location=true&latitude=90" +
                                            "&longitude=90";
 
-    private ServiceMediator serviceMediator;
+    private CommonServiceMediator serviceMediator;
 
     @Autowired
-    public InfoAggregatorController(ServiceMediator serviceMediator) {
+    public InfoAggregatorController(CommonServiceMediator serviceMediator) {
         this.serviceMediator = serviceMediator;
     }
 

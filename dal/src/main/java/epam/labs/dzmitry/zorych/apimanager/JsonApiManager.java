@@ -4,5 +4,5 @@ import epam.labs.dzmitry.zorych.entity.Location;
 import epam.labs.dzmitry.zorych.urlcreator.BadUrlApiException;
 
 public interface JsonApiManager {
-    String getRequestFor(Location location) throws BadUrlApiException, JsonApiManagerException;
+    String getResponseFor(Location location) throws BadUrlApiException, JsonApiManagerException;
 }

@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Information about location for receiving data from rest-providers
+ */
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString

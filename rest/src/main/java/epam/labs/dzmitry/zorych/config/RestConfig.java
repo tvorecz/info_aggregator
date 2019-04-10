@@ -1,17 +1,11 @@
 package epam.labs.dzmitry.zorych.config;
 
-import epam.labs.dzmitry.zorych.mediator.CommonMediator;
-import epam.labs.dzmitry.zorych.mediator.impl.ServiceMediator;
+import epam.labs.dzmitry.zorych.mediator.CommonServiceMediator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
-import org.springframework.core.env.Environment;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
@@ -27,7 +21,7 @@ public class RestConfig implements WebMvcConfigurer {
 
 
     @Autowired
-    public CommonMediator serviceMediator;
+    public CommonServiceMediator serviceMediator;
 
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {

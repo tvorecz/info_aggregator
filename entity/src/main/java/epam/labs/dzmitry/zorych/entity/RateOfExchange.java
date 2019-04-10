@@ -5,6 +5,9 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.Map;
 
+/**
+ * Contains rates of exchange for current location
+ */
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString

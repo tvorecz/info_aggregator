@@ -1,20 +1,30 @@
 package epam.labs.dzmitry.zorych.mediator.impl;
 
 import epam.labs.dzmitry.zorych.entity.*;
-import epam.labs.dzmitry.zorych.mediator.CommonMediator;
+import epam.labs.dzmitry.zorych.mediator.CommonServiceMediator;
 import epam.labs.dzmitry.zorych.mediator.InvalidParameterException;
 import epam.labs.dzmitry.zorych.mediator.ReceivingDataIsFailedException;
 import epam.labs.dzmitry.zorych.service.CannotGetDataException;
 import epam.labs.dzmitry.zorych.service.CommonService;
 import epam.labs.dzmitry.zorych.validator.ParamValidator;
 
-public class ServiceMediator implements CommonMediator {
+/**
+ * Provides accessing to dao according to current request parameters
+ */
+public class ServiceMediator implements CommonServiceMediator {
     private ParamValidator validator;
 
     private CommonService<Location> locationService;
     private CommonService<Weather> weatherService;
     private CommonService<RateOfExchange> rateOfExchangeService;
 
+    /**
+     * Create instance of mediator
+     * @param validator Validator for request params
+     * @param locationService Service for accessing to location-dao
+     * @param weatherService Service for accessing to weather-dao
+     * @param rateOfExchangeService Service for accessing to currency-dao
+     */
     public ServiceMediator(ParamValidator validator,
                            CommonService<Location> locationService,
                            CommonService<Weather> weatherService,
@@ -25,6 +35,13 @@ public class ServiceMediator implements CommonMediator {
         this.rateOfExchangeService = rateOfExchangeService;
     }
 
+    /**
+     * Form response according ro current request params
+     * @param requestParam Request params
+     * @return
+     * @throws InvalidParameterException Generates when request params are invalid
+     * @throws ReceivingDataIsFailedException Generates when received exception from data layer
+     */
     @Override
     public ResponseParam get(RequestParam requestParam) throws InvalidParameterException,
                                                                ReceivingDataIsFailedException {

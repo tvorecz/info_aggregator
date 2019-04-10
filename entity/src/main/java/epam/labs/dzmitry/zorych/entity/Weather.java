@@ -4,6 +4,9 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * Contains information about weather for current location
+ */
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString

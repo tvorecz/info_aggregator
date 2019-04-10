@@ -4,7 +4,7 @@ import epam.labs.dzmitry.zorych.dao.JsonDao;
 import epam.labs.dzmitry.zorych.entity.Location;
 import epam.labs.dzmitry.zorych.entity.RateOfExchange;
 import epam.labs.dzmitry.zorych.entity.Weather;
-import epam.labs.dzmitry.zorych.mediator.CommonMediator;
+import epam.labs.dzmitry.zorych.mediator.CommonServiceMediator;
 import epam.labs.dzmitry.zorych.mediator.impl.ServiceMediator;
 import epam.labs.dzmitry.zorych.service.impl.CommonServiceImpl;
 import epam.labs.dzmitry.zorych.validator.ParamValidator;
@@ -33,7 +33,7 @@ public class ServiceConfig {
     }
 
     @Bean
-    public CommonMediator serviceMediator() {
+    public CommonServiceMediator serviceMediator() {
         return new ServiceMediator(validator(), new CommonServiceImpl<Location>(locationDao), new CommonServiceImpl<Weather>(weatherDao), new CommonServiceImpl<RateOfExchange>(rateOfExchangeDao));
     }
 }

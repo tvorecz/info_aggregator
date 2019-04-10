@@ -44,7 +44,7 @@ public class JsonRequestApiManagerTest {
     public void testJsonRequestApiManager() throws JsonApiManagerException, BadUrlApiException {
         JsonRequestApiManager jsonRequestApiManager = new JsonRequestApiManager(mockUrlBuilder);
 
-        String actual = jsonRequestApiManager.getRequestFor(location);
+        String actual = jsonRequestApiManager.getResponseFor(location);
 
         String expected = "return stream";
 

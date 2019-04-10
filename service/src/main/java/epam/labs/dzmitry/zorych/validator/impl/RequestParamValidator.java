@@ -3,6 +3,9 @@ package epam.labs.dzmitry.zorych.validator.impl;
 import epam.labs.dzmitry.zorych.entity.RequestParam;
 import epam.labs.dzmitry.zorych.validator.ParamValidator;
 
+/**
+ * Validator for current request params
+ */
 public class RequestParamValidator implements ParamValidator {
 
     @Override

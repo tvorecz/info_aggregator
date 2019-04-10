@@ -8,6 +8,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
+
+/**
+ * Creates url for rest-request for current parameters
+ */
 public class JsonRequestUrlCreatorByLocation implements RequestUrlCreator {
     private final static String LATITUDE = "@{latitude}";
     private final static String LONGITUDE = "@{longitude}";
@@ -24,11 +28,22 @@ public class JsonRequestUrlCreatorByLocation implements RequestUrlCreator {
     String url =
     "https://free.currencyconverterapi.com/api/v6/convert?q=${iso_code}_USD,${iso_code}_EUR,${iso_code}_GBP,${iso_code}_CNY&compact=ultra&apiKey=${key}";
 
+    /**
+     * Create instance of UrlCreator
+     * @param urlTemplate template of url with parameters markers
+     * @param key api access key
+     */
     public JsonRequestUrlCreatorByLocation(String urlTemplate, String key) {
         this.urlTemplate = prepareUrlTemplate(urlTemplate);
         this.key = key;
     }
 
+    /**
+     * Create URL object for access to rest-api resource
+     * @param location Location for request
+     * @return URL object associated with current rest-resource
+     * @throws BadUrlApiException Generates when url is not valid
+     */
     @Override
     public URL createURL(Location location) throws BadUrlApiException {
         URL url = null;

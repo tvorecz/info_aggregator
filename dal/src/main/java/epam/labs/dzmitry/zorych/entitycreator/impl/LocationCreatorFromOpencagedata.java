@@ -10,6 +10,9 @@ import epam.labs.dzmitry.zorych.entitycreator.EntityCreator;
 
 import java.time.LocalDate;
 
+/**
+ * Create Location from json-string, receiving from OpenCageData
+ */
 public class LocationCreatorFromOpencagedata implements EntityCreator<Location> {
     private final static String[] typesOfObjects = {"city", "town", "village", "state"};
 

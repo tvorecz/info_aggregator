@@ -4,6 +4,9 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * Serve for sending response information from services to controller
+ */
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString

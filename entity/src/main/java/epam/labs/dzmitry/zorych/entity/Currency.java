@@ -1,5 +1,8 @@
 package epam.labs.dzmitry.zorych.entity;
 
+/**
+ * Types of currency iso codes
+ */
 public enum Currency {
     AED,
     AFN,

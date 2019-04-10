@@ -12,15 +12,28 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * Used for access for different api-providers (weather, currency, location)
+ */
 public class JsonRequestApiManager implements JsonApiManager {
+    /**
+     * Used for creating unique url for every query
+     */
     private RequestUrlCreator urlBuilder;
 
     public JsonRequestApiManager(RequestUrlCreator urlBuilder) {
         this.urlBuilder = urlBuilder;
     }
 
+    /**
+     * Return json-response as a string for current location
+     * @param location Current search location
+     * @return Json-responce as a string
+     * @throws BadUrlApiException Generate when url received from property is bad
+     * @throws JsonApiManagerException Generate when appear stream problems
+     */
     @Override
-    public String getRequestFor(Location location) throws BadUrlApiException, JsonApiManagerException {
+    public String getResponseFor(Location location) throws BadUrlApiException, JsonApiManagerException {
         String resultRequest = null;
         InputStream stream = null;
         String charset = null;

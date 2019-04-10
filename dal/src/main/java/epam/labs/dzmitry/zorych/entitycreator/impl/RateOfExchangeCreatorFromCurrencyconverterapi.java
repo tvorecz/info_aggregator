@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Create RateOfExchange from json-string, receiving from CurrencyConverterApi
+ */
 public class RateOfExchangeCreatorFromCurrencyconverterapi implements EntityCreator<RateOfExchange> {
     private final static Currency[] CURRENCIES = {Currency.EUR, Currency.USD, Currency.RUB, Currency.GBP, Currency.CNY};
 
