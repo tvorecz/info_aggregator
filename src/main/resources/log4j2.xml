@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+    <Properties>
+        <Property name="fileAspectLogging">logs/aspect_logs.log</Property>
+        <Property name="fileAspectErrorLogging">logs/aspect_error_logs.log</Property>
+        <Property name="basePattern">%d{HH:mm:ss, dd MMM yyyy} [%-5p] (%F:%L) — %m%n — \n %xEx{full}</Property>
+
+    </Properties>
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${basePattern}" />
+        </Console>
+
+        <File name="FILE_ASPECT" filename="${fileAspectLogging}">
+            <PatternLayout pattern="${basePattern}" />
+        </File>
+
+        <File name="FILE_ASPECT_ERROR" filename="${fileAspectErrorLogging}">
+            <PatternLayout pattern="${basePattern}" />
+        </File>
+    </Appenders>
+
+    <Loggers>
+
+
+
+        <Logger name="epam.labs.dzmitry.zorych.aspect.AspectLogger" level="ERROR">
+            <Appender-ref ref="FILE_ASPECT_ERROR" />
+        </Logger>
+
+        <Root level="DEBUG">
+            <Appender-ref ref="STDOUT" />
+        </Root>
+    </Loggers>
+
+
+</Configuration>
