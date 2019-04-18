@@ -10,6 +10,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Builder
 public class ResponseParam implements Serializable {
     private static final long serialVersionUID = 7038376738406505846L;
 

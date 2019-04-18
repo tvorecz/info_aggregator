@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Builder
 public class RequestParam implements Serializable {
     private static final long serialVersionUID = 6254043388346691481L;
 

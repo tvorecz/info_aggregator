@@ -10,6 +10,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Builder
 public class ErrorInformation implements Serializable {
     private static final long serialVersionUID = 8912167449777957574L;
 

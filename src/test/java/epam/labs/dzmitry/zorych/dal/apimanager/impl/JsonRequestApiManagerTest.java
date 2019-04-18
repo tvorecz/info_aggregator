@@ -1,6 +1,7 @@
 package epam.labs.dzmitry.zorych.dal.apimanager.impl;
 
 import epam.labs.dzmitry.zorych.dal.apimanager.JsonApiManagerException;
+import epam.labs.dzmitry.zorych.entity.ErrorInformation;
 import epam.labs.dzmitry.zorych.entity.Location;
 import epam.labs.dzmitry.zorych.dal.urlcreator.BadUrlApiException;
 import epam.labs.dzmitry.zorych.dal.urlcreator.impl.JsonRequestUrlCreatorByLocation;
